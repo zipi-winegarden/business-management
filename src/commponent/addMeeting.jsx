@@ -11,6 +11,8 @@ import { TextField } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import Box from "@mui/material/Box"
 import "../App.css"
+import Alert from '@mui/material/Alert';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -24,7 +26,7 @@ const style = {
 };
 
 const AddMeeting = observer(({ serviceType }) => {
-
+  const [error, setError] = useState(false)
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -54,7 +56,13 @@ MeetingStore.setIsAdd(false)
    await MeetingStore.editMeeting(service)
    console.log("MeetingStore.isAdd: ",MeetingStore.isAdd)
    if(MeetingStore.isAdd)
-        setOpen(false)
+  { setOpen(false)
+    setError(true)}
+  else
+  {
+    setError(true)
+  }
+       
     e.target.reset();
   }
 
@@ -82,6 +90,7 @@ MeetingStore.setIsAdd(false)
             <MyDatePicker
             color="secondary"
             fullWidth
+            type="dateTime"
               name="dateTime"
               onChange={(date) => {
                 setService((prevService) => ({
@@ -90,9 +99,10 @@ MeetingStore.setIsAdd(false)
                 }));
               }}
             />
-
+{error&&<Alert severity="error">Date is Invalid Please choose an other one</Alert>}
             <TextField
             fullWidth
+           
               label="clientName"
               name="clientName"
               onChange={handleChange}

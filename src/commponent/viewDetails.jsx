@@ -9,7 +9,7 @@ const ViewDetails = observer((props) => {
     {Object.entries(data)?.map(([key, value]) => (
       <>
         <div key={key}>{key}: {value}</div>
-        
+        <br/>
       </>
 
     ))}
