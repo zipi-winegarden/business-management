@@ -12,8 +12,6 @@ class ServicesStore {
 
     }
 
-
-    
     EditServices = async (dataForm) => {
         const response = await fetch("http://localhost:8787/service", {
             method: "POST",
